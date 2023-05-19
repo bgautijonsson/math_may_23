@@ -269,7 +269,16 @@ mcmc
 
 ## Enter Copulas
 
-![](images/copula_trade.png){fig-align=center}
+In each year, we have $N$ observations of maximum hourly precipitation, $y_1, \dots, y_N$. For dependence modeling with copulas we need
+
+* univariate models for each of the variables $y_1, \dots, y_N$
+* copula models for the dependence between the $N$ variables
+
+
+$$
+F(y) = C(F_1(y_1), \dots, F_N(y_N))
+$$
+
 
 ## Steps
 
@@ -279,6 +288,52 @@ mcmc
 2. Transform observed data to $[0, 1]$ using GEV params
 3. Transform $[0, 1]$ to t-distribution
 4. Calculate $Q$, the precision matrix of our t-distribution
+
+## Precision Matrices
+
+$$
+\scriptsize{
+\begin{gathered}
+E(\mathbf{y_t}) = \mathbf0 \qquad \mathrm{cov}(\mathbf{y_t}) = Q^{-1}
+\end{gathered}
+}
+$$
+
+$$
+\scriptsize{
+\begin{gathered}
+E(y_{i,t} | \mathbf{y_{-i,t}}) = -Q^{-1}_{i,i}\sum_{j\in A_i, j\neq i} Q_{i,j}y_{j,t} \\
+\mathrm{Prec}(y_{i,t} | \mathbf{y_{-i,t}}) = Q_{i,i} = (\mathrm{var}(y_{i,t} | \mathbf{y_{-i,t}}))^{-1} = \tau_i^{-2}
+\end{gathered}
+}
+$$
+
+## Precision is nice
+
+$$
+\scriptsize{
+y_{i,t} = \sum_{j\in A_i, j\neq i} \beta_{i,j}y_{j, t} + \varepsilon_{i, t}
+}
+$$
+
+$$
+\scriptsize{
+\hat\beta_i = (X_i^TX_i)^{-1}X_i^T\mathbf y_i
+}
+$$
+
+$$
+\scriptsize{
+\hat\tau_i^2 = T^{-1}(\mathbf y_i - X_i\hat\beta_i)^T(\mathbf y_i - X_i\hat\beta_i)
+}
+$$
+
+$$
+\hat Q_{i,j} = \begin{cases}
+-\hat\tau_i^{-2}\hat\beta_{i,j}, \quad i \neq j \\
+\hat\tau_i^{-2}, \quad i=j
+\end{cases}
+$$
 
 
 ## Previously on Binni's PhD

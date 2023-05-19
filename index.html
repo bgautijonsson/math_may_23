@@ -662,8 +662,15 @@ f(\mu, \sigma, \xi, \Delta) \sim \mathrm{Normal}
 <img data-src="images/copula_rannis.png" class="r-stretch quarto-figure-center"></section>
 <section id="enter-copulas" class="slide level2">
 <h2>Enter Copulas</h2>
-
-<img data-src="images/copula_trade.png" class="r-stretch quarto-figure-center"></section>
+<p>In each year, we have <span class="math inline">\(N\)</span> observations of maximum hourly precipitation, <span class="math inline">\(y_1, \dots, y_N\)</span>. For dependence modeling with copulas we need</p>
+<ul>
+<li>univariate models for each of the variables <span class="math inline">\(y_1, \dots, y_N\)</span></li>
+<li>copula models for the dependence between the <span class="math inline">\(N\)</span> variables</li>
+</ul>
+<p><span class="math display">\[
+F(y) = C(F_1(y_1), \dots, F_N(y_N))
+\]</span></p>
+</section>
 <section id="steps" class="slide level2">
 <h2>Steps</h2>
 
@@ -673,6 +680,48 @@ f(\mu, \sigma, \xi, \Delta) \sim \mathrm{Normal}
 <li>Transform <span class="math inline">\([0, 1]\)</span> to t-distribution</li>
 <li>Calculate <span class="math inline">\(Q\)</span>, the precision matrix of our t-distribution</li>
 </ol>
+</section>
+<section id="precision-matrices" class="slide level2">
+<h2>Precision Matrices</h2>
+<p><span class="math display">\[
+\scriptsize{
+\begin{gathered}
+E(\mathbf{y_t}) = \mathbf0 \qquad \mathrm{cov}(\mathbf{y_t}) = Q^{-1}
+\end{gathered}
+}
+\]</span></p>
+<p><span class="math display">\[
+\scriptsize{
+\begin{gathered}
+E(y_{i,t} | \mathbf{y_{-i,t}}) = -Q^{-1}_{i,i}\sum_{j\in A_i, j\neq i} Q_{i,j}y_{j,t} \\
+\mathrm{Prec}(y_{i,t} | \mathbf{y_{-i,t}}) = Q_{i,i} = (\mathrm{var}(y_{i,t} | \mathbf{y_{-i,t}}))^{-1} = \tau_i^{-2}
+\end{gathered}
+}
+\]</span></p>
+</section>
+<section id="precision-is-nice" class="slide level2">
+<h2>Precision is nice</h2>
+<p><span class="math display">\[
+\scriptsize{
+y_{i,t} = \sum_{j\in A_i, j\neq i} \beta_{i,j}y_{j, t} + \varepsilon_{i, t}
+}
+\]</span></p>
+<p><span class="math display">\[
+\scriptsize{
+\hat\beta_i = (X_i^TX_i)^{-1}X_i^T\mathbf y_i
+}
+\]</span></p>
+<p><span class="math display">\[
+\scriptsize{
+\hat\tau_i^2 = T^{-1}(\mathbf y_i - X_i\hat\beta_i)^T(\mathbf y_i - X_i\hat\beta_i)
+}
+\]</span></p>
+<p><span class="math display">\[
+\hat Q_{i,j} = \begin{cases}
+-\hat\tau_i^{-2}\hat\beta_{i,j}, \quad i \neq j \\
+\hat\tau_i^{-2}, \quad i=j
+\end{cases}
+\]</span></p>
 </section>
 <section id="previously-on-binnis-phd" class="slide level2">
 <h2>Previously on Binni’s PhD</h2>
