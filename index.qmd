@@ -1,0 +1,135 @@
+
+
+## Background
+
+<br>
+
+![](images/lifeyrir2.png){fig-align=center .r-stretch}
+
+## Extreme Precipitation
+
+![](images/phd_nafn.png){fig-align=center width=50% .m-0 .p-0}
+
+::: {layout="[50,50]"}
+
+![](images/flod1.jpg){fig-align=center width=450px .mt-0 .pt-0}
+
+![](images/flod2.jpg){fig-align=center width=450px .mt-0 .pt-0}
+
+:::
+
+## United Kingdom Climate Projections
+
+![](images/max_precip.png){fig-align=center}
+
+$$
+180 \times 244 \times 24 \times 365 \times 60 \approx 23 \cdot 10^9
+$$
+
+## Use the maximum (Luke)
+
+
+
+![](images/dreifing_maximum.gif){fig-align=center}
+
+$$
+180 \times 244 \times 60 \approx 2.6 \cdot 10^6
+$$
+
+## Statistics of Extremes
+
+<br>
+
+::: {layout="[40,60]"}
+
+![Fisher & Tippett](images/fishertippett.jpg){fig-align=center}
+
+![](images/theorem3.png){fig-align=center}
+
+:::
+
+## Central Limits vs Extremes
+
+$$
+\scriptsize{
+\begin{aligned}
+X_1, \dots, X_n &\sim F(x) \\
+S_n &= X_1 + \dots + X_n \\
+M_n &= \max{\{X_1, \dots, X_n\}}
+\end{aligned}
+}
+$$
+
+<br>
+
+::: {columns}
+
+::: {.column width="49%"}
+
+Central Limit Problem
+
+$$
+\scriptsize{
+\frac{S_n - a_n}{b_n} \rightarrow G(x)?
+}
+$$
+
+:::
+
+::: {.column width="49%"}
+
+Extreme Value Problem
+
+$$
+\scriptsize{
+\frac{M_n - a_n}{b_n} \rightarrow G(x)?
+}
+$$
+:::
+
+:::
+
+## Exponential example:  $F(x) = 1 - e^{-x}$
+
+$$
+\scriptsize{
+\begin{aligned}
+P\left(
+\frac{M_n - a_n}{b_n} \leq x
+\right) =
+P\left(M_n \leq a_n + b_nx \right) =
+\left[1 - e^{-(a_n + b_nx)}\right]^n
+\end{aligned}
+}
+$$
+
+Choose 
+$$
+\scriptsize{
+a_n = \ln(n) = F^{-1}(1 - n^{-1})
+\qquad
+b_n = 1
+}
+$$
+
+Then we get
+
+$$
+\scriptsize{
+P\left(M_n \leq a_n + b_nx \right) =
+\left[1 - n^{-1}e^{-x}\right]^n \rightarrow \exp{\{-e^{-x}\}}
+}
+$$
+
+This is the [Gumbel distribution](https://en.wikipedia.org/wiki/Gumbel_distribution)
+
+## Generalized Extreme Value Distribution
+
+$$
+F(x) = e^{-\left[
+1 + \xi \left(
+\frac{x - \mu}{\sigma}
+\right)
+\right]^{-1/\xi}
+}
+$$

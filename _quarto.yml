@@ -1,0 +1,23 @@
+project:
+  title: "stae_may_18"
+
+
+title: "Improved 21st century projections of sub-daily extreme precipitation by spatio-temporal recalibration"
+author: "Brynjólfur Gauti Guðrúnar Jónsson"
+institute: "Statistics, Faculty of Physical Sciences"
+
+format: 
+    revealjs:
+        theme: theme.scss
+        slide-number: true
+        view-distance: 5
+        auto-stretch: true
+execute:
+    echo: false
+    warning: false
+    error: false
+fig-align: center
+slide-number: false
+logo: images/hi-audkenni_28-raunsvisd.png
+footer: "[bggj.is/stae_may_15](https://bggj.is/stae_may_15){target='_blank'}"
+
