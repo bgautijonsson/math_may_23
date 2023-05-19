@@ -237,6 +237,59 @@ make_Q_u(3, 3)
 
 :::
 
+## Sampler
+
+* $43920 \cdot 4 = 175680$ station-specific parameters
+* Want to run sampler for thousands of iterations
+* Save each iteration into a collection of parquet files
+    - One folder for each chain
+    - One folder for each iteration
+* Query the posterior like a database
+
+## Parquet Posterior
+
+```{r, eval = FALSE}
+#| echo: true
+#| eval: false
+library(arrow)
+mcmc <- open_dataset("data/posterior") |> to_duckdb()
+mcmc
+```
+
+
+
+
+![](images/parquet.png){fig-align=center}
+
+
+
+## Still a problem
+
+![](images/copula_rannis.png){fig-align=center}
+
+## Enter Copulas
+
+![](images/copula_trade.png){fig-align=center}
+
+## Steps
+
+![](images/copula_rannis.png){fig-align=center}
+
+1. Get posterior of station-wise GEV parameters
+2. Transform observed data to $[0, 1]$ using GEV params
+3. Transform $[0, 1]$ to t-distribution
+4. Calculate $Q$, the precision matrix of our t-distribution
+
+
+## Previously on Binni's PhD
+
+![](images/mean_neighbor_effect_multivariate.png){fig-align=center}
+
+## Previously on Binni's PhD
+
+![](images/spatial_dist_by_neighbor_type_mcmc.png){fig-align=center}
+
+
 ## Results (no spatial smoothing)
 
 <br>
@@ -264,3 +317,5 @@ make_Q_u(3, 3)
 [Code for slides and figures](https://github.com/bgautijonsson/math_may_23)
 
 [Code and data for my PhD](https://github.com/bgautijonsson/bggjphd)
+
+[Website where I update documentation and results](https://bggj.is/phd/)

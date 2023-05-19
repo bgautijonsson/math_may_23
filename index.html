@@ -634,6 +634,54 @@ f(\mu, \sigma, \xi, \Delta) \sim \mathrm{Normal}
 </div>
 </div>
 </section>
+<section id="sampler" class="slide level2">
+<h2>Sampler</h2>
+<ul>
+<li><span class="math inline">\(43920 \cdot 4 = 175680\)</span> station-specific parameters</li>
+<li>Want to run sampler for thousands of iterations</li>
+<li>Save each iteration into a collection of parquet files
+<ul>
+<li>One folder for each chain</li>
+<li>One folder for each iteration</li>
+</ul></li>
+<li>Query the posterior like a database</li>
+</ul>
+</section>
+<section id="parquet-posterior" class="slide level2">
+<h2>Parquet Posterior</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(arrow)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>mcmc <span class="ot">&lt;-</span> <span class="fu">open_dataset</span>(<span class="st">"data/posterior"</span>) <span class="sc">|&gt;</span> <span class="fu">to_duckdb</span>()</span>
+<span id="cb5-3"><a href="#cb5-3"></a>mcmc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<img data-src="images/parquet.png" class="r-stretch quarto-figure-center"></section>
+<section id="still-a-problem" class="slide level2">
+<h2>Still a problem</h2>
+
+<img data-src="images/copula_rannis.png" class="r-stretch quarto-figure-center"></section>
+<section id="enter-copulas" class="slide level2">
+<h2>Enter Copulas</h2>
+
+<img data-src="images/copula_trade.png" class="r-stretch quarto-figure-center"></section>
+<section id="steps" class="slide level2">
+<h2>Steps</h2>
+
+<img data-src="images/copula_rannis.png" class="r-stretch quarto-figure-center"><ol type="1">
+<li>Get posterior of station-wise GEV parameters</li>
+<li>Transform observed data to <span class="math inline">\([0, 1]\)</span> using GEV params</li>
+<li>Transform <span class="math inline">\([0, 1]\)</span> to t-distribution</li>
+<li>Calculate <span class="math inline">\(Q\)</span>, the precision matrix of our t-distribution</li>
+</ol>
+</section>
+<section id="previously-on-binnis-phd" class="slide level2">
+<h2>Previously on Binni’s PhD</h2>
+
+<img data-src="images/mean_neighbor_effect_multivariate.png" class="r-stretch quarto-figure-center"></section>
+<section id="previously-on-binnis-phd-1" class="slide level2">
+<h2>Previously on Binni’s PhD</h2>
+
+<img data-src="images/spatial_dist_by_neighbor_type_mcmc.png" class="r-stretch quarto-figure-center"></section>
 <section id="results-no-spatial-smoothing" class="slide level2">
 <h2>Results (no spatial smoothing)</h2>
 <p><br></p>
@@ -655,6 +703,7 @@ f(\mu, \sigma, \xi, \Delta) \sim \mathrm{Normal}
 <p><br></p>
 <p><a href="https://github.com/bgautijonsson/math_may_23">Code for slides and figures</a></p>
 <p><a href="https://github.com/bgautijonsson/bggjphd">Code and data for my PhD</a></p>
+<p><a href="https://bggj.is/phd/">Website where I update documentation and results</a></p>
 
 <img src="images/hi-audkenni_28-raunsvisd.png" class="slide-logo r-stretch"><div class="footer footer-default">
 <p><a href="https://bggj.is/math_may_23" target="_blank">bggj.is/math_may_23</a></p>
