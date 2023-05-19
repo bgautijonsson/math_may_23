@@ -559,11 +559,21 @@ Station 3 <span class="math inline">\((\mu_3, \sigma_3, \xi_3, \Delta_1)\)</span
 </div>
 </div>
 </section>
-<section id="spatial-model" class="slide level2">
-<h2>Spatial Model</h2>
+<section id="max-and-smooth" class="slide level2">
+<h2>Max(-and-Smooth)</h2>
+<p><span class="math display">\[
+\begin{aligned}
+L (\eta | y) &amp;= \prod_i^N L (\eta_i | y_i)\\
+&amp;= \prod_i^N \mathrm{Normal}(\eta_i | \hat\eta_i, \Sigma_{\eta_i y_i}) \\
+&amp;= \mathrm{Normal}(\eta | \hat\eta, \Sigma_{\eta y})
+\end{aligned}
+\]</span></p>
+</section>
+<section id="max-and-smooth-1" class="slide level2">
+<h2>(Max-and)-Smooth</h2>
 <p><span class="math display">\[
 \tiny{
-h(\mu) \sim \mathrm{Normal}
+f(\mu, \sigma, \xi, \Delta) \sim \mathrm{Normal}
 \left(
 \begin{bmatrix}
 \mu_\mu \\ \mu_\sigma \\ \mu_\xi \\ \mu_\Delta
@@ -576,11 +586,20 @@ h(\mu) \sim \mathrm{Normal}
 \end{bmatrix}
 \right)
 }
-\]</span> <img data-src="images/qu.png" style="width:100.0%" data-fig-align="center"></p>
+\]</span></p>
+<p><span class="math display">\[
+\tiny{
+\begin{aligned}
+(\mu_\mu, \mu_\sigma, \mu_\xi, \mu_\Delta) &amp;\sim \mathrm{SensiblePrior(\theta_\mu)} \\
+(\tau_\mu, \tau_\sigma, \tau_\xi, \tau_\Delta) &amp;\sim \mathrm{SensiblePrior(\theta_\tau)}
+\end{aligned}
+}
+\]</span></p>
 </section>
-<section id="spatial-model-1" class="slide level2">
+<section id="spatial-model" class="slide level2">
 <h2>Spatial Model</h2>
-<div class="{columns}">
+
+<img data-src="images/qu.png" style="width:50.0%" class="r-stretch quarto-figure-center"><div class="{columns}">
 <div class="column" style="width:49%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">matrix</span>(</span>
@@ -615,17 +634,30 @@ h(\mu) \sim \mathrm{Normal}
 </div>
 </div>
 </section>
-<section id="results" class="slide level2">
-<h2>Results</h2>
+<section id="results-no-spatial-smoothing" class="slide level2">
+<h2>Results (no spatial smoothing)</h2>
 <p><br></p>
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/param_results_mcmc.png"></p>
-</figure>
-</div>
-<p><img src="images/hi-audkenni_28-raunsvisd.png" class="slide-logo"></p>
-<div class="footer footer-default">
-<p><a href="https://bggj.is/stae_may_15" target="_blank">bggj.is/stae_may_15</a></p>
+
+<img data-src="images/param_results_ml.png" style="width:60.0%" class="r-stretch quarto-figure-center"></section>
+<section id="results-with-spatial-smoothing" class="slide level2">
+<h2>Results (with spatial smoothing)</h2>
+<p><br></p>
+
+<img data-src="images/param_results_mcmc.png" style="width:60.0%" class="r-stretch quarto-figure-center"></section>
+<section id="summary" class="slide level2">
+<h2>Summary</h2>
+<p><br></p>
+<ul>
+<li>Large dataset with many parameters</li>
+<li>Max-and-Smooth makes things easier</li>
+<li>Copulas to make data-level correlations</li>
+</ul>
+<p><br></p>
+<p><a href="https://github.com/bgautijonsson/math_may_23">Code for slides and figures</a></p>
+<p><a href="https://github.com/bgautijonsson/bggjphd">Code and data for my PhD</a></p>
+
+<img src="images/hi-audkenni_28-raunsvisd.png" class="slide-logo r-stretch"><div class="footer footer-default">
+<p><a href="https://bggj.is/math_may_23" target="_blank">bggj.is/math_may_23</a></p>
 </div>
 </section>
     </div>

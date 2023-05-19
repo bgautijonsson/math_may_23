@@ -78,7 +78,7 @@ p <- plot_param(
     ) +
     plot_annotation(
         title = "Results from our spatial model",
-        subtitle = "Pointwise mean estimates from our Bayesian hierarchical model"
+        subtitle = "Pointwise mean estimates from our spatial Bayesian hierarchical model"
     )
 
 
@@ -102,3 +102,33 @@ d <- read_parquet("data/station_results.parquet") |>
     stations_to_sf() |> 
     points_to_grid()
 
+p <- plot_param(
+    mu, 
+    subtitle = "Location (μ)"
+) +
+    plot_param(
+        sigma,
+        subtitle = "Scale (σ)"
+    ) +
+    plot_param(
+        xi,
+        subtitle = "Shape (ξ)"
+    ) +
+    plot_param(
+        delta,
+        subtitle = "Trend (Δ)"
+    ) +
+    plot_layout(
+        nrow = 1
+    ) +
+    plot_annotation(
+        title = "Results from maximum likelihood model",
+        subtitle = "Pointwise mean for each station without spatial effects"
+    )
+
+
+ggsave(
+    plot = p,
+    filename = "images/param_results_ml.png",
+    width = 8, height = 0.4 * 8, scale = 1.3
+)

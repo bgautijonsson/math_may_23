@@ -166,11 +166,21 @@ $$
 
 :::
 
-## Spatial Model
+## Max(-and-Smooth)
+
+$$
+\begin{aligned}
+L (\eta | y) &= \prod_i^N L (\eta_i | y_i)\\
+&= \prod_i^N \mathrm{Normal}(\eta_i | \hat\eta_i, \Sigma_{\eta_i y_i}) \\
+&= \mathrm{Normal}(\eta | \hat\eta, \Sigma_{\eta y})
+\end{aligned}
+$$
+
+## (Max-and)-Smooth
 
 $$
 \tiny{
-h(\mu) \sim \mathrm{Normal} 
+f(\mu, \sigma, \xi, \Delta) \sim \mathrm{Normal} 
 \left(
 \begin{bmatrix}
 \mu_\mu \\ \mu_\sigma \\ \mu_\xi \\ \mu_\Delta
@@ -184,9 +194,19 @@ h(\mu) \sim \mathrm{Normal}
 \right)
 }
 $$
-![](images/qu.png){fig-align=center width=100%}
+
+$$
+\tiny{
+\begin{aligned}
+(\mu_\mu, \mu_\sigma, \mu_\xi, \mu_\Delta) &\sim \mathrm{SensiblePrior(\theta_\mu)} \\
+(\tau_\mu, \tau_\sigma, \tau_\xi, \tau_\Delta) &\sim \mathrm{SensiblePrior(\theta_\tau)}
+\end{aligned}
+}
+$$
 
 ## Spatial Model
+
+![](images/qu.png){fig-align=center width=50%}
 
 ::: {columns}
 
@@ -203,6 +223,7 @@ matrix(
 ```
 
 
+
 :::
 
 ::: {.column width="49%"}
@@ -216,8 +237,30 @@ make_Q_u(3, 3)
 
 :::
 
-## Results
+## Results (no spatial smoothing)
 
 <br>
 
-![](images/param_results_mcmc.png){fig-align=center}
+![](images/param_results_ml.png){fig-align=center width="60%"}
+
+## Results (with spatial smoothing)
+
+<br>
+
+
+![](images/param_results_mcmc.png){fig-align=center width="60%"}
+
+
+## Summary
+
+<br>
+
+* Large dataset with many parameters
+* Max-and-Smooth makes things easier
+* Copulas to make data-level correlations
+
+<br>
+
+[Code for slides and figures](https://github.com/bgautijonsson/math_may_23)
+
+[Code and data for my PhD](https://github.com/bgautijonsson/bggjphd)
