@@ -1,4 +1,13 @@
 
+```{r setup, message=FALSE}
+library(tidyverse)
+library(bggjphd)
+library(metill)
+library(sf)
+
+theme_set(theme_bggj())
+```
+
 
 ## Background
 
@@ -147,8 +156,6 @@ $$
 
 <p style='color:#0570b0;text-align:center'>Station 3 $(\mu_3, \sigma_3, \xi_3, \Delta_1)$</p>
 
-![](images/qu.png){fig-align=center width=100%}
-
 :::
 
 ::: {.column width="40%"}
@@ -158,3 +165,59 @@ $$
 :::
 
 :::
+
+## Spatial Model
+
+$$
+\tiny{
+h(\mu) \sim \mathrm{Normal} 
+\left(
+\begin{bmatrix}
+\mu_\mu \\ \mu_\sigma \\ \mu_\xi \\ \mu_\Delta
+\end{bmatrix},
+\begin{bmatrix}
+ \tau_\mu Q_u & \\
+ & \tau_\sigma Q_u \\ 
+ & & \tau_\xi Q_u \\
+ & & & \tau_\Delta Q_u
+\end{bmatrix}
+\right)
+}
+$$
+![](images/qu.png){fig-align=center width=100%}
+
+## Spatial Model
+
+::: {columns}
+
+::: {.column width="49%"}
+
+
+
+```{r}
+#| echo: true
+matrix(
+    1:9,
+    nrow = 3, ncol = 3
+)
+```
+
+
+:::
+
+::: {.column width="49%"}
+
+```{r}
+#| echo: true
+make_Q_u(3, 3)
+```
+
+:::
+
+:::
+
+## Results
+
+<br>
+
+![](images/param_results_mcmc.png){fig-align=center}
