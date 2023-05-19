@@ -125,11 +125,36 @@ This is the [Gumbel distribution](https://en.wikipedia.org/wiki/Gumbel_distribut
 
 ## Generalized Extreme Value Distribution
 
+
+
+::: {.columns}
+
+::: {.column width="60%"}
+
 $$
 F(x) = e^{-\left[
 1 + \xi \left(
-\frac{x - \mu}{\sigma}
+\frac{x - \tilde{\mu}}{\sigma}
 \right)
 \right]^{-1/\xi}
-}
+} \\
+\tilde\mu = \mu \cdot [1 + \Delta \cdot (t - t_0)]
 $$
+
+<p style='color:#99000d;text-align:center'>Station 1 $(\mu_1, \sigma_1, \xi_1, \Delta_1)$</p>
+
+<p style='color:#ff7f00;text-align:center'>Station 2 $(\mu_2, \sigma_2, \xi_2, \Delta_1)$</p>
+
+<p style='color:#0570b0;text-align:center'>Station 3 $(\mu_3, \sigma_3, \xi_3, \Delta_1)$</p>
+
+![](images/qu.png){fig-align=center width=100%}
+
+:::
+
+::: {.column width="40%"}
+
+![](images/stations.png)
+
+:::
+
+:::
